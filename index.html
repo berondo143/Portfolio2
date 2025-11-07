@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="day">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,144 +8,183 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
+            --primary: #6C63FF;
+            --secondary: #4A44C6;
+            --accent: #A29BFE;
+            --dark: #121212;
+            --darker: #0a0a0a;
             --light: #ffffff;
-            --text-color: #333333; /* Default text color for day */
+            --gray: #e0e0e0;
+            --gradient-1: linear-gradient(135deg, #6C63FF, #4A44C6);
+            --gradient-2: linear-gradient(135deg, #4A44C6, #A29BFE);
+            --gradient-3: linear-gradient(135deg, #A29BFE, #6C63FF);
+            --gradient-bg: radial-gradient(ellipse at bottom, #1b1b2f 0%, #0a0a0f 100%);
         }
-
-        [data-theme="day"] {
-            --primary: #228B22; /* Forest Green */
-            --secondary: #556B2F; /* Dark Olive Green */
-            --accent: #32CD32; /* Lime Green */
-            --dark: #006400; /* Dark Green */
-            --darker: #013220; /* Very Dark Green */
-            --gradient-1: linear-gradient(135deg, #228B22, #556B2F);
-            --gradient-2: linear-gradient(135deg, #556B2F, #32CD32);
-            --gradient-3: linear-gradient(135deg, #32CD32, #228B22);
-            --text-color: #000000; /* Dark text for day mode */
-        }
-
-        [data-theme="night"] {
-            --primary: #0B3D0B; /* Darker Forest Green */
-            --secondary: #2F4F2F; /* Dark Slate Green */
-            --accent: #006400; /* Dark Green */
-            --dark: #002200; /* Very Dark Green */
-            --darker: #001100; /* Almost Black Green */
-            --gradient-1: linear-gradient(135deg, #0B3D0B, #2F4F2F);
-            --gradient-2: linear-gradient(135deg, #2F4F2F, #006400);
-            --gradient-3: linear-gradient(135deg, #006400, #0B3D0B);
-            --text-color: #ffffff; /* Light text for night mode */
-        }
-
+       
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+       
         html {
             scroll-behavior: smooth;
         }
-
+       
         body {
             font-family: 'Poppins', sans-serif;
-            color: var(--text-color);
+            background: var(--gradient-bg);
+            color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: background-image 0.5s ease;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Added text shadow for better readability */
         }
-
-        [data-theme="day"] body {
-            background-image: url('https://www.hdwallpapers.in/download/landscape_photography_of_orchard_in_forest_during_daytime_4k_hd_nature-3840x2160.jpg');
-        }
-
-        [data-theme="night"] body {
-            background-image: url('https://images.pexels.com/photos/2885320/pexels-photo-2885320.jpeg');
-        }
-
-        /* Navigation */
-        nav {
+       
+        /* Premium Particle Background */
+        #particles-js {
             position: fixed;
-            top: 0;
             width: 100%;
-            background: rgba(var(--dark), 0.95); /* Increased opacity */
-            padding: 20px 0;
-            text-align: center;
-            z-index: 1000;
-            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            height: 100%;
+            z-index: -1;
+            background: var(--gradient-bg);
+        }
+        
+        /* Floating Profile Photo */
+        .floating-profile {
+            position: fixed;
+            right: 0%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 330px;
+            height: 350px;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             transition: all 0.3s ease;
+        }
+        
+        .floating-profile .profile-img-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
-        nav.scrolled {
-            padding: 15px 0;
-            background: rgba(var(--darker), 0.98); /* Increased opacity */
-            box-shadow: 0 5px 30px rgba(var(--secondary), 0.2);
+        
+        .floating-profile .profile-img {
+            width: 250px;
+            height: 280px;
+            border-radius: 20%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: var(--gradient-1) padding-box, var(--gradient-1) border-box;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.5);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
         }
-
-        nav a {
-            color: var(--light);
-            margin: 0 25px;
+        
+        .floating-profile .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.7);
+        }
+        
+        
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        /* Content Container */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+       
+        /* Left Navigation */
+        .left-nav {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(18, 18, 18, 0.8);
+            padding: 20px 15px;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 0 5px 30px rgba(108, 99, 255, 0.2);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+       
+        .left-nav.scrolled {
+            background: rgba(10, 10, 10, 0.9);
+        }
+       
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-decoration: none;
-            font-weight: 600;
+            color: var(--light);
             transition: all 0.3s ease;
             position: relative;
-            font-size: 1.1em;
-            letter-spacing: 1px;
+            padding: 10px;
+            border-radius: 10px;
         }
-
-        nav a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -8px;
-            left: 0;
-            background: var(--gradient-1);
-            transition: width 0.3s ease;
-            border-radius: 3px;
+       
+        .nav-item i {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
         }
-
-        nav a:hover {
+       
+        .nav-item span {
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+       
+        .nav-item:hover {
+            color: var(--primary);
+            background: rgba(108, 99, 255, 0.1);
+        }
+       
+        .nav-item:hover i {
+            transform: scale(1.2);
+        }
+       
+        .nav-item.active {
             color: var(--primary);
         }
-
-        nav a:hover:after {
-            width: 100%;
-        }
-
-        #theme-toggle {
+       
+        .nav-item.active:after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 30px;
             background: var(--gradient-1);
-            color: var(--light);
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 20px;
+            border-radius: 2px;
         }
-
-        #theme-toggle:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(var(--primary), 0.4);
-        }
-
+       
         /* Header/Hero Section */
         header {
             position: relative;
-            padding: 200px 20px 150px;
+            
             text-align: center;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(var(--secondary), 0.3), rgba(var(--primary), 0.3)); /* Slightly increased opacity */
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.2), rgba(74, 68, 198, 0.2));
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
             min-height: 100vh;
             display: flex;
@@ -153,80 +192,34 @@
             justify-content: center;
             align-items: center;
         }
-
-        .profile-img-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .profile-img {
-            border-radius: 50%;
-            border: 4px solid transparent;
-            background: var(--gradient-1) padding-box, var(--gradient-1) border-box;
-            box-shadow: 0 10px 30px rgba(var(--primary), 0.5);
-            width: 280px;
-            height: 280px;
-            object-fit: cover;
-            transition: all 0.5s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 15px 40px rgba(var(--primary), 0.7);
-        }
-
-        .profile-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
-            background: var(--gradient-1);
-            filter: blur(30px);
-            opacity: 0.5;
-            z-index: 1;
-            animation: pulse 3s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
-        }
-
+       
         header h1 {
             font-size: 4.5em;
             margin: 20px 0 10px;
-            background: linear-gradient(to right, var(--light), #E0FFFF, var(--primary));
+            background: linear-gradient(to right, #ffffff, #6C63FF, #4A44C6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             letter-spacing: 2px;
         }
-
+       
         header p {
             font-size: 1.8em;
             margin: 20px 0 30px;
-            color: var(--text-color);
+            color: #ffffff;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             font-weight: 300;
             max-width: 800px;
         }
-
+       
         /* Sections */
         section {
             padding: 120px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
             position: relative;
         }
-
+       
         .section-container {
-            background: rgba(var(--dark), 0.85); /* Increased opacity for better readability */
+            background: rgba(31, 31, 31, 0.6);
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(15px);
@@ -235,7 +228,7 @@
             position: relative;
             overflow: hidden;
         }
-
+       
         .section-container::before {
             content: '';
             position: absolute;
@@ -245,7 +238,7 @@
             height: 5px;
             background: var(--gradient-1);
         }
-
+       
         section h2 {
             text-align: center;
             font-size: 3em;
@@ -260,7 +253,7 @@
             font-weight: 800;
             letter-spacing: 1px;
         }
-
+       
         section h2:after {
             content: '';
             position: absolute;
@@ -271,7 +264,7 @@
             background: var(--gradient-1);
             border-radius: 4px;
         }
-
+       
         /* About section */
         #about p {
             font-size: 1.3em;
@@ -280,7 +273,7 @@
             margin: 0 auto;
             line-height: 1.8;
         }
-
+       
         /* Skills section with animated bars */
         .skills-container {
             display: grid;
@@ -288,9 +281,9 @@
             gap: 30px;
             margin-top: 40px;
         }
-
+       
         .skill-item {
-            background: rgba(var(--darker), 0.85); /* Increased opacity */
+            background: rgba(40, 40, 40, 0.7);
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
@@ -299,18 +292,18 @@
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
+       
         .skill-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(var(--secondary), 0.4);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
         }
-
+       
         .skill-item h3 {
             color: var(--accent);
             margin-bottom: 15px;
             font-size: 1.5em;
         }
-
+       
         .skill-bar {
             height: 10px;
             background: rgba(255, 255, 255, 0.1);
@@ -318,7 +311,7 @@
             margin-top: 15px;
             overflow: hidden;
         }
-
+       
         .skill-progress {
             height: 100%;
             border-radius: 5px;
@@ -326,7 +319,7 @@
             width: 0;
             transition: width 1.5s ease-in-out;
         }
-
+       
         /* Projects section with 3D card effect */
         .projects-grid {
             display: grid;
@@ -334,9 +327,9 @@
             gap: 40px;
             margin-top: 40px;
         }
-
+       
         .project-card {
-            background: rgba(var(--darker), 0.85); /* Increased opacity */
+            background: rgba(40, 40, 40, 0.7);
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -344,29 +337,29 @@
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
+       
         .project-card:hover {
             transform: translateY(-15px) rotateX(5deg);
-            box-shadow: 0 20px 40px rgba(var(--accent), 0.3);
+            box-shadow: 0 20px 40px rgba(162, 155, 254, 0.3);
         }
-
+       
         .project-content {
             padding: 30px;
             position: relative;
             z-index: 2;
         }
-
+       
         .project-card h3 {
             color: var(--accent);
             margin-bottom: 15px;
             font-size: 1.6em;
         }
-
+       
         .project-card p {
             margin-bottom: 20px;
-            color: rgba(var(--light), 0.8);
+            color: rgba(255, 255, 255, 0.8);
         }
-
+       
         .project-link {
             display: inline-block;
             color: var(--primary);
@@ -376,17 +369,17 @@
             position: relative;
             padding: 8px 20px;
             border-radius: 30px;
-            background: rgba(var(--primary), 0.1);
-            border: 1px solid rgba(var(--primary), 0.3);
+            background: rgba(108, 99, 255, 0.1);
+            border: 1px solid rgba(108, 99, 255, 0.3);
         }
-
+       
         .project-link:hover {
             color: var(--light);
             background: var(--gradient-1);
-            box-shadow: 0 5px 15px rgba(var(--primary), 0.4);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
             transform: translateY(-3px);
         }
-
+       
         /* Contact section */
         .contact-container {
             display: flex;
@@ -395,13 +388,13 @@
             gap: 40px;
             margin-top: 40px;
         }
-
+       
         .contact-info {
             text-align: center;
             flex: 1;
             min-width: 300px;
         }
-
+       
         .contact-info .social-links {
             display: flex;
             justify-content: center;
@@ -409,7 +402,7 @@
             margin-bottom: 30px;
             flex-wrap: wrap;
         }
-
+       
         .social-link {
             color: var(--light);
             text-decoration: none;
@@ -420,17 +413,17 @@
             transition: all 0.3s ease;
             padding: 12px 25px;
             border-radius: 30px;
-            background: rgba(var(--darker), 0.9); /* Increased opacity */
+            background: rgba(40, 40, 40, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+       
         .social-link:hover {
             color: var(--light);
             transform: translateY(-5px);
             background: var(--gradient-1);
-            box-shadow: 0 8px 20px rgba(var(--primary), 0.4);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
         }
-
+       
         .contact-details {
             font-size: 1.2em;
             display: flex;
@@ -438,23 +431,23 @@
             gap: 15px;
             align-items: center;
         }
-
+       
         .contact-details p {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
+       
         /* Footer */
         footer {
             text-align: center;
             padding: 40px 20px;
-            background: var(--dark);
+            background: #000000;
             font-size: 1em;
             position: relative;
             margin-top: 80px;
         }
-
+       
         footer:before {
             content: '';
             position: absolute;
@@ -464,7 +457,7 @@
             height: 4px;
             background: var(--gradient-1);
         }
-
+       
         /* Buttons */
         .learn-more-btn {
             background: var(--gradient-1);
@@ -479,10 +472,10 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(var(--primary), 0.4);
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
             letter-spacing: 1px;
         }
-
+       
         .learn-more-btn:before {
             content: '';
             position: absolute;
@@ -493,16 +486,16 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
-
+       
         .learn-more-btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(var(--primary), 0.6);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.6);
         }
-
+       
         .learn-more-btn:hover:before {
             left: 100%;
         }
-
+       
         /* Scroll to top button */
         .scroll-top {
             position: fixed;
@@ -521,121 +514,127 @@
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(var(--primary), 0.4);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
         }
-
+       
         .scroll-top.active {
             opacity: 1;
             visibility: visible;
         }
-
+       
         .scroll-top:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(var(--primary), 0.6);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.6);
         }
-
+       
         /* Responsive design */
         @media (max-width: 1024px) {
+            .floating-profile {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .floating-profile .profile-img {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .floating-profile .profile-glow {
+                width: 280px;
+                height: 280px;
+            }
+            
             header h1 {
                 font-size: 3.5em;
             }
-
+           
             header p {
                 font-size: 1.5em;
             }
-
+           
             section h2 {
                 font-size: 2.5em;
             }
         }
-
+       
+        @media (max-width: 900px) {
+            .floating-profile {
+                display: none;
+            }
+            
+            .content-container {
+                max-width: 100%;
+            }
+        }
+       
         @media (max-width: 768px) {
+            .left-nav {
+                top: auto;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+                width: 90%;
+                padding: 15px;
+                border-radius: 20px 20px 0 0;
+            }
+           
+            .nav-item span {
+                display: none;
+            }
+           
             header {
                 padding: 150px 20px 100px;
             }
-
+           
             header h1 {
                 font-size: 2.8em;
             }
-
+           
             header p {
                 font-size: 1.3em;
             }
-
-            nav {
-                padding: 15px 0;
-            }
-
-            nav a {
-                margin: 0 15px;
-                font-size: 1em;
-            }
-
+           
             section {
                 padding: 80px 15px;
             }
-
+           
             .section-container {
                 padding: 40px 25px;
             }
-
+           
             section h2 {
                 font-size: 2.2em;
             }
-
-            .profile-img {
-                width: 220px;
-                height: 220px;
-            }
-
-            .profile-glow {
-                width: 260px;
-                height: 260px;
-            }
-
+           
             .projects-grid {
                 grid-template-columns: 1fr;
             }
-
+           
             .skills-container {
                 grid-template-columns: 1fr;
             }
         }
-
+       
         @media (max-width: 480px) {
             header h1 {
                 font-size: 2.2em;
             }
-
+           
             header p {
                 font-size: 1.1em;
             }
-
-            nav a {
-                margin: 0 10px;
-                font-size: 0.9em;
-            }
-
-            .profile-img {
-                width: 180px;
-                height: 180px;
-            }
-
-            .profile-glow {
-                width: 220px;
-                height: 220px;
-            }
-
+           
             section h2 {
                 font-size: 1.8em;
             }
-
+           
             .contact-info .social-links {
                 flex-direction: column;
                 align-items: center;
             }
         }
-
+       
         /* Fade-in animation for sections */
         .fade-in {
             opacity: 1;
@@ -644,144 +643,260 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-        <button id="theme-toggle">Toggle Mode</button>
-    </nav>
-
-    <!-- Header/Hero Section -->
-    <header id="home">
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Floating Profile Photo -->
+    <div class="floating-profile">
         <div class="profile-img-container">
             <div class="profile-glow"></div>
-            <!-- Using a placeholder image since we don't have the actual profile image -->
             <img src="images/sss.jpg" class="profile-img" alt="Jagdish Love Berondo Profile">
         </div>
-        <h1>Jagdish Love Berondo</h1>
-        <p>Web Developer | Creating Modern, Responsive Websites and Web Applications</p>
-        <button class="learn-more-btn" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">Explore My Work</button>
-    </header>
-
-    <!-- About Section -->
-    <section id="about" class="fade-in">
-        <div class="section-container">
-            <h2>About Me</h2>
-            <p>I'm a passionate web developer with expertise in HTML, CSS, JavaScript, and PHP. I specialize in creating sleek, user-friendly websites and web applications that deliver premium experiences across all devices. My focus is on combining aesthetic design with robust functionality to create digital solutions that exceed expectations.</p>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="fade-in">
-        <div class="section-container">
-            <h2>Skills</h2>
-            <div class="skills-container">
-                <div class="skill-item">
-                    <h3>HTML</h3>
-                    <p>Semantic markup, accessibility, modern HTML5 features</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="95"></div>
+    </div>
+   
+    <!-- Left Navigation -->
+    <nav class="left-nav" id="navbar">
+        <a href="#home" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#about" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>About</span>
+        </a>
+        <a href="#skills" class="nav-item">
+            <i class="fas fa-code"></i>
+            <span>Skills</span>
+        </a>
+        <a href="#projects" class="nav-item">
+            <i class="fas fa-project-diagram"></i>
+            <span>Projects</span>
+        </a>
+        <a href="#contact" class="nav-item">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+    </nav>
+   
+    <!-- Main Content Container -->
+    <div class="content-container">
+        <!-- Header/Hero Section -->
+        <header id="home">
+            <h1>Jagdish Love Berondo</h1>
+            <p>Web Developer | Creating Modern, Responsive Websites and Web Applications</p>
+            <button class="learn-more-btn" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">Explore My Work</button>
+        </header>
+       
+        <!-- About Section -->
+        <section id="about" class="fade-in">
+            <div class="section-container">
+                <h2>About Me</h2>
+                <p>I'm a passionate web developer with expertise in HTML, CSS, JavaScript, and PHP. I specialize in creating sleek, user-friendly websites and web applications that deliver premium experiences across all devices. My focus is on combining aesthetic design with robust functionality to create digital solutions that exceed expectations.</p>
+            </div>
+        </section>
+       
+        <!-- Skills Section -->
+        <section id="skills" class="fade-in">
+            <div class="section-container">
+                <h2>Skills</h2>
+                <div class="skills-container">
+                    <div class="skill-item">
+                        <h3>HTML</h3>
+                        <p>Semantic markup, accessibility, modern HTML5 features</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="skill-item">
-                    <h3>CSS</h3>
-                    <p>Flexbox, Grid, animations, responsive design, CSS frameworks</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="90"></div>
+                    <div class="skill-item">
+                        <h3>CSS</h3>
+                        <p>Flexbox, Grid, animations, responsive design, CSS frameworks</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="skill-item">
-                    <h3>JavaScript</h3>
-                    <p>ES6+, DOM manipulation, AJAX, modern frameworks</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="85"></div>
+                    <div class="skill-item">
+                        <h3>JavaScript</h3>
+                        <p>ES6+, DOM manipulation, AJAX, modern frameworks</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="skill-item">
-                    <h3>PHP</h3>
-                    <p>Backend development, database integration, server-side logic</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="80"></div>
+                    <div class="skill-item">
+                        <h3>PHP</h3>
+                        <p>Backend development, database integration, server-side logic</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="skill-item">
-                    <h3>MySQL</h3>
-                    <p>Database design, query optimization, data management</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="75"></div>
+                    <div class="skill-item">
+                        <h3>MySQL</h3>
+                        <p>Database design, query optimization, data management</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="skill-item">
-                    <h3>Responsive Design</h3>
-                    <p>Mobile-first approach, cross-browser compatibility</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="95"></div>
+                    <div class="skill-item">
+                        <h3>Responsive Design</h3>
+                        <p>Mobile-first approach, cross-browser compatibility</p>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="fade-in">
-        <div class="section-container">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Sibugay Technical Institute Inc. Inventory Management System</h3>
-                        <p>A modern Inventory Management System built using HTML, CSS, Javascript, PHP, and MySql. Features include user authentication, product tracking, reporting, and a responsive interface.</p>
-                        <a href="https://stiiinventorysystem.42web.io/" class="project-link" target="_blank">View Project</a>
+        </section>
+       
+        <!-- Projects Section -->
+        <section id="projects" class="fade-in">
+            <div class="section-container">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Sibugay Technical Institute Inc. Inventory Management System</h3>
+                            <p>A modern Inventory Management System built using HTML, CSS, Javascript, PHP, and MySql. Features include user authentication, product tracking, reporting, and a responsive interface.</p>
+                            <a href="https://stiiinventorysystem.42web.io/" class="project-link" target="_blank">View Project</a>
+                        </div>
                     </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Portfolio Website</h3>
-                        <p>A responsive and visually stunning portfolio website showcasing my skills and projects. Built with modern CSS techniques and smooth animations.</p>
-                        <a href="#" class="project-link">View Project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="fade-in">
-        <div class="section-container">
-            <h2>Contact Me</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/share/1GBkQWxisy/" class="social-link" target="_blank" title="Facebook">
-                            <i class="fab fa-facebook-f"></i> Facebook
-                        </a>
-                        <a href="mailto:jagdishberondo@gmail.com" class="social-link" title="Email">
-                            <i class="fas fa-envelope"></i> Email
-                        </a>
-                    </div>
-                    <div class="contact-details">
-                        <p><i class="fas fa-phone"></i> +63 906 120 6043</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Philippines</p>
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Portfolio Website</h3>
+                            <p>A responsive and visually stunning portfolio website showcasing my skills and projects. Built with modern CSS techniques and smooth animations.</p>
+                            <a href="#" class="project-link">View Project</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Jagdish Love Berondo. All rights reserved.</p>
-    </footer>
-
+        </section>
+       
+        <!-- Contact Section -->
+        <section id="contact" class="fade-in">
+            <div class="section-container">
+                <h2>Contact Me</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/1GBkQWxisy/" class="social-link" target="_blank" title="Facebook">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </a>
+                            <a href="mailto:jagdishberondo@gmail.com" class="social-link" title="Email">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                        <div class="contact-details">
+                            <p><i class="fas fa-phone"></i> +63 906 120 6043</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Philippines</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Jagdish Love Berondo. All rights reserved.</p>
+        </footer>
+    </div>
+   
     <!-- Scroll to Top Button -->
     <div class="scroll-top" id="scrollTop">
         <i class="fas fa-chevron-up"></i>
     </div>
-
+   
+    <!-- Particle.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+   
     <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: ["#6C63FF", "#4A44C6", "#A29BFE"]
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#6C63FF",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
@@ -790,7 +905,7 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
-
+           
             // Scroll to top button visibility
             const scrollTop = document.getElementById('scrollTop');
             if (window.scrollY > 500) {
@@ -798,8 +913,11 @@
             } else {
                 scrollTop.classList.remove('active');
             }
+            
+            // Update active nav item based on scroll position
+            updateActiveNavItem();
         });
-
+       
         // Scroll to top functionality
         document.getElementById('scrollTop').addEventListener('click', function() {
             window.scrollTo({
@@ -807,11 +925,11 @@
                 behavior: 'smooth'
             });
         });
-
+       
         // Animate skill bars on scroll
         function animateSkillBars() {
             const skillBars = document.querySelectorAll('.skill-progress');
-
+           
             skillBars.forEach(bar => {
                 const width = bar.getAttribute('data-width');
                 if (isElementInViewport(bar)) {
@@ -819,7 +937,7 @@
                 }
             });
         }
-
+       
         // Check if element is in viewport
         function isElementInViewport(el) {
             const rect = el.getBoundingClientRect();
@@ -830,15 +948,15 @@
                 rect.right <= (window.innerWidth || document.documentElement.clientWidth)
             );
         }
-
+       
         // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
+        document.querySelectorAll('.nav-item').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-
+               
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-
+               
                 if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
@@ -847,30 +965,38 @@
                 }
             });
         });
-
-        // Theme toggle
-        const toggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        let theme = localStorage.getItem('theme') || 'day';
-        html.setAttribute('data-theme', theme);
-        toggle.textContent = theme === 'day' ? 'Switch to Night' : 'Switch to Day';
-
-        toggle.addEventListener('click', () => {
-            theme = theme === 'day' ? 'night' : 'day';
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            toggle.textContent = theme === 'day' ? 'Switch to Night' : 'Switch to Day';
-        });
-
+        
+        // Update active nav item based on scroll position
+        function updateActiveNavItem() {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${currentSection}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
+       
         // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function() {
             // Animate skill bars initially
             animateSkillBars();
-
+           
             // Animate skill bars on scroll
             window.addEventListener('scroll', animateSkillBars);
         });
     </script>
 </body>
 </html>
-
